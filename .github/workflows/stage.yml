@@ -32,11 +32,6 @@ jobs:
 
       - name: Execute Gradle build
         run: ./gradlew bootJar
- 
-      - uses: actions/upload-artifact@v2
-        with:
-          name: Package
-          path: build/libs
           
       - name: Build container image
         run: docker build -t $(echo $REGISTRY)/$(echo $IMAGE_NAME):latest .
@@ -69,15 +64,5 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           envs: IMAGE_NAME,REGISTRY,{{ secrets.DIGITALOCEAN_ACCESS_TOKEN }},GITHUB_SHA
           script: |
-            # Login to registry
             docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} registry.digitalocean.com
-            # Stop running container
-            # docker stop $(echo $IMAGE_NAME)
-            # Remove old container
-            # docker rm $(echo $IMAGE_NAME)
-            # Run a new container from a new image
-            # docker run -d \
-            # --restart always \
-            # --name $(echo $IMAGE_NAME) \
-            #$(echo $REGISTRY)/$(echo $IMAGE_NAME):latest
             docker-compose -f ~/compose.yml up -d
