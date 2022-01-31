@@ -6,10 +6,7 @@ import com.github.javaparser.serialization.JavaParserJsonSerializer;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import javax.json.Json;
@@ -18,6 +15,7 @@ import javax.json.Json;
 public final class ParsingController {
 
     @PostMapping(value = "/parse", produces = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin
     @ResponseBody
     public ResponseEntity<StreamingResponseBody> parse(@RequestBody String code) throws ParseProblemException {
         final var parsed = StaticJavaParser.parse(code);
