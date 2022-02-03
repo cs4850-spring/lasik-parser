@@ -16,8 +16,7 @@ public final class ParsingController {
 
     @PostMapping(value = "/parse", produces = MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin(origins = "http://lasik.michaelepps.me/", methods = RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity<StreamingResponseBody> parse(@RequestBody String code) throws ParseProblemException {
+    public @ResponseBody ResponseEntity<StreamingResponseBody> parse(@RequestBody String code) throws ParseProblemException {
         final var parsed = StaticJavaParser.parse(code);
 
         StreamingResponseBody responseBody = outputStream -> {
