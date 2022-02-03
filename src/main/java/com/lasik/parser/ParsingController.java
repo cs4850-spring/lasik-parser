@@ -12,7 +12,7 @@ import javax.json.Json;
 @RestController
 public final class ParsingController {
 
-    @RequestMapping(value = "/parse")
+    @RequestMapping("/parse")
     @CrossOrigin
     public @ResponseBody ResponseEntity<StreamingResponseBody> parse(@RequestBody String code) throws ParseProblemException {
         final var parsed = StaticJavaParser.parse(code);
