@@ -3,7 +3,6 @@ package com.lasik.parser;
 import com.github.javaparser.ParseProblemException;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.serialization.JavaParserJsonSerializer;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
@@ -13,7 +12,7 @@ import javax.json.Json;
 @RestController
 public final class ParsingController {
 
-    @PostMapping(value = "/parse", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(name = "/parse")
     @CrossOrigin
     public @ResponseBody ResponseEntity<StreamingResponseBody> parse(@RequestBody String code) throws ParseProblemException {
         final var parsed = StaticJavaParser.parse(code);
