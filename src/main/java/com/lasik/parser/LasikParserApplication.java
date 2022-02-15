@@ -10,6 +10,4 @@ public class LasikParserApplication {
         SpringApplication.run(LasikParserApplication.class, args);
     }
 
-
-
 }
