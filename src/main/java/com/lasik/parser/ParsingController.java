@@ -33,7 +33,10 @@ public final class ParsingController {
     @ExceptionHandler(value = {ParseProblemException.class })
     public ResponseEntity<List<String>> handleParseException(ParseProblemException e)
     {
-        return new ResponseEntity<List<String>>(e.getProblems().stream().map(Problem::getVerboseMessage).collect(Collectors.toList()), HttpStatus.BAD_REQUEST);
+        List<String> problems = e.getProblems().stream().map(Problem::getVerboseMessage).collect(Collectors.toList());
+        System.out.println(problems);
+
+        return new ResponseEntity<List<String>>(problems, HttpStatus.BAD_REQUEST);
     }
 
 
